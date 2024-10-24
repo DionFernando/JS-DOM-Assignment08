@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activity 02</title>
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: darkslategray;
+        }
+
+        main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+
+        }
+        section{
+            height: 70px;
+            width: 800px;
+            border-top: 2px solid gray;
+            border-bottom: 2px solid gray;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div{
+            margin: 10px;
+            width: 100px;
+            height: 50px;
+            background: lightblue;
+            border-radius: 10px;
+        }
+
+        #box1{
+            position: absolute;
+            background: red;
+            left: 275px;
+            top: 235px;
+        }
+
+        #box6{
+            position: absolute;
+            background: hotpink;
+            right: 275px;
+            bottom: 235px;
+        }
+
+        #box2{
+            background: green;
+        }
+
+        #box3{
+            background: blue;
+        }
+
+        #box4{
+            background: yellow;
+        }
+
+        #box5{
+            background: pink;
+        }
+
+        #startBtn{
+            position: absolute;
+            width: 200px;
+            height: 50px;
+
+            bottom: 100px;
+            left: 430px;
+
+            background: limegreen;
+            border: 2px solid darkgreen;
+            border-radius: 20px;
+        }
+
+        #startBtn:hover{
+            background: darkgreen;
+            color: white;
+        }
+
+        #stopBtn{
+            position: absolute;
+            width: 200px;
+            height: 50px;
+
+            bottom: 100px;
+            right: 430px;
+
+            background: lightcoral;
+            border: 2px solid red;
+            border-radius: 20px;
+        }
+
+        #stopBtn:hover{
+            background: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <div id="box1"></div>
+    <section>
+        <div id="box2"></div>
+        <div id="box3"></div>
+        <div id="box4"></div>
+        <div id="box5"></div>
+    </section>
+    <div id="box6"></div>
+
+    <button id="startBtn">Start</button>
+    <button id="stopBtn">Stop</button>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        // Start button
+        document.getElementById("startBtn").addEventListener("click", () => {
+            if (!intervalId) { // Only start if there's no interval running
+                startRotation();
+            }
+        });
+
+        // Stop button
+        document.getElementById("stopBtn").addEventListener("click", () => {
+            stopRotation();
+            intervalId = null;
+        });
+
+        startRotation();
+    });
+
+    let intervalId;
+
+    function startRotation() {
+        intervalId = setInterval(() => {
+            let box1 = document.getElementById("box1");
+            let box2 = document.getElementById("box2");
+            let box3 = document.getElementById("box3");
+            let box4 = document.getElementById("box4");
+            let box5 = document.getElementById("box5");
+            let box6 = document.getElementById("box6");
+
+            let tempColor = window.getComputedStyle(box6).backgroundColor;
+
+            box6.style.backgroundColor = window.getComputedStyle(box5).backgroundColor;
+            box5.style.backgroundColor = window.getComputedStyle(box4).backgroundColor;
+            box4.style.backgroundColor = window.getComputedStyle(box3).backgroundColor;
+            box3.style.backgroundColor = window.getComputedStyle(box2).backgroundColor;
+            box2.style.backgroundColor = window.getComputedStyle(box1).backgroundColor;
+            box1.style.backgroundColor = tempColor;
+        }, 1000);
+    }
+
+    function stopRotation() {
+        clearInterval(intervalId);
+    }
+</script>
+
+</body>
+</html>

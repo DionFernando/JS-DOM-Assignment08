@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activity 01</title>
+
+    <style>
+        h2{
+            text-align: center;
+            color: hotpink;
+            font-size: 50px;
+        }
+        section{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        div{
+            width: 200px;
+            height: 200px;
+            /*background: lightblue;
+            border: 2px solid darkblue;
+            border-radius: 10px;*/
+            margin: 8px;
+            display: flex;
+            justify-content: right;
+            align-items: flex-start;
+        }
+
+        div h1{
+            position: absolute;
+            margin-right: 60px;
+            font-size: 30px;
+            color: darkslateblue;
+        }
+
+        #startBtn{
+            position: absolute;
+            width: 200px;
+            height: 50px;
+
+            bottom: 150px;
+            left: 430px;
+
+            background: limegreen;
+            border: 2px solid darkgreen;
+            border-radius: 20px;
+        }
+
+        #startBtn:hover{
+            background: darkgreen;
+            color: white;
+        }
+
+        #stopBtn{
+            position: absolute;
+            width: 200px;
+            height: 50px;
+
+            bottom: 150px;
+            right: 430px;
+
+            background: lightcoral;
+            border: 2px solid red;
+            border-radius: 20px;
+        }
+
+        #stopBtn:hover{
+            background: red;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<h2>JS Que</h2>
+<section>
+    <div>
+        <img src="../assets/monkey.gif" alt="gif">
+        <h1>A</h1>
+    </div>
+    <div>
+        <img src="../assets/monkey.gif" alt="gif">
+        <h1>B</h1>
+    </div>
+    <div>
+        <img src="../assets/monkey.gif" alt="gif">
+        <h1>C</h1>
+    </div>
+    <div>
+        <img src="../assets/monkey.gif" alt="gif">
+        <h1>D</h1>
+    </div>
+    <div>
+        <img src="../assets/monkey.gif" alt="gif">
+        <h1>E</h1>
+    </div>
+    <div>
+        <img src="../assets/monkey.gif" alt="gif">
+        <h1>F</h1>
+    </div>
+
+    <button type="button" id="startBtn">Start</button>
+    <button type="button" id="stopBtn">Stop</button>
+
+</section>
+
+<script>
+    let arr = ["A","B","C","D","E","F"];
+    let intervalId; // To store the interval ID
+
+    function startRotation() {
+        intervalId = setInterval(() => {
+            let last_value = arr.pop();
+            arr.unshift(last_value);
+            console.log(arr);
+
+            document.getElementsByTagName("h1")[0].innerText = arr[0];
+            document.getElementsByTagName("h1")[1].innerText = arr[1];
+            document.getElementsByTagName("h1")[2].innerText = arr[2];
+            document.getElementsByTagName("h1")[3].innerText = arr[3];
+            document.getElementsByTagName("h1")[4].innerText = arr[4];
+            document.getElementsByTagName("h1")[5].innerText = arr[5];
+        }, 3000);
+    }
+
+    function stopRotation() {
+        clearInterval(intervalId); // Stop the interval
+    }
+
+    // Start button
+    document.getElementById("startBtn").addEventListener("click", () => {
+        if (!intervalId) { // Only start if there's no interval running
+            startRotation();
+        }
+    });
+
+    // Stop button
+    document.getElementById("stopBtn").addEventListener("click", () => {
+        stopRotation();
+        intervalId = null; // Reset the intervalId to allow re-start
+    });
+
+    // Automatically start on load
+    startRotation();
+
+</script>
+
+</body>
+</html>
